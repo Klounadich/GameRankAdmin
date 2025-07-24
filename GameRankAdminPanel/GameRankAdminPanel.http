@@ -1,0 +1,6 @@
+@GameRankAdminPanel_HostAddress = http://localhost:5079
+
+GET {{GameRankAdminPanel_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

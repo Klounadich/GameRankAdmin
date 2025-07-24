@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "bNbu+PuhYCo=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Ярослав\\my pets\\GameRankAdminPanel\\GameRankAdminPanel\\GameRankAdminPanel.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Ярослав\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.5\\microsoft.aspnetcore.openapi.9.0.5.nupkg.sha512",
+    "C:\\Users\\Ярослав\\.nuget\\packages\\microsoft.openapi\\1.6.23\\microsoft.openapi.1.6.23.nupkg.sha512",
+    "C:\\Users\\Ярослав\\.nuget\\packages\\rabbitmq.client\\7.1.2\\rabbitmq.client.7.1.2.nupkg.sha512",
+    "C:\\Users\\Ярослав\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\9.0.3\\swashbuckle.aspnetcore.swagger.9.0.3.nupkg.sha512",
+    "C:\\Users\\Ярослав\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\9.0.3\\swashbuckle.aspnetcore.swaggergen.9.0.3.nupkg.sha512",
+    "C:\\Users\\Ярослав\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\9.0.3\\swashbuckle.aspnetcore.swaggerui.9.0.3.nupkg.sha512",
+    "C:\\Users\\Ярослав\\.nuget\\packages\\system.io.pipelines\\8.0.0\\system.io.pipelines.8.0.0.nupkg.sha512",
+    "C:\\Users\\Ярослав\\.nuget\\packages\\system.threading.ratelimiting\\8.0.0\\system.threading.ratelimiting.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
