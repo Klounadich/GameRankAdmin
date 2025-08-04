@@ -26,18 +26,25 @@ public class AdminMgmtController:ControllerBase
 
     public async Task<IActionResult> GetUsers([FromBody] string Username)
     {
+        
         var  user = await _userManager.FindByNameAsync(Username);
-
-       var result = await _userMgmtService.GetUsers(user);
-       
-        return Ok( new
+        if (user != null)
         {
-            Username = result.UserName,
-            Role = result.Role,
-            Status = result.Status,
-            IpAdress = result.IPAdress
-            
-        });
+            var result = await _userMgmtService.GetUsers(user);
+
+            return Ok(new
+            {
+                Username = result.UserName,
+                Role = result.Role,
+                Status = result.Status,
+                IpAdress = result.IPAdress
+
+            });
+        }
+        else
+        {
+            return BadRequest(new { Message = "Пользователь не найден . Обратитесь в поддержку" });
+        }
     }
 
     [HttpGet("get-ban")]
