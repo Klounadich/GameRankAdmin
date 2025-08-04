@@ -68,4 +68,92 @@ public class AdminMgmtController:ControllerBase
         return BadRequest();
     }
 
+
+    [HttpPost("ban-user")]
+    public async Task<IActionResult> BanUser([FromBody] string Username)
+    {
+        var user = await _userManager.FindByNameAsync(Username);
+        if (user != null)
+        {
+            var result = await _userMgmtService.BanUser(user);
+            if (result.Success)
+            {
+                return Ok(new
+                {
+                    Success = true, 
+                    result.Message
+                });
+            }
+            else
+            {
+                return BadRequest(new
+                {
+                    Success = false, 
+                    result.Message
+                });
+            }
+        }
+        else
+        {
+            return BadRequest(new { Message = "Пользователь не найден . Обратитесь в поддержку" });
+        }
+    }
+    [HttpPost("unban-user")]
+    public async Task<IActionResult> UnBanUser([FromBody] string Username)
+    {
+        var user = await _userManager.FindByNameAsync(Username);
+        if (user != null)
+        {
+            var result = await _userMgmtService.UnbanUser(user);
+            if (result.Success)
+            {
+                return Ok(new
+                {
+                    Success = true, 
+                    result.Message
+                });
+            }
+            else
+            {
+                return BadRequest(new
+                {
+                    Success = false, 
+                    result.Message
+                });
+            }
+        }
+        else
+        {
+            return BadRequest(new { Message = "Пользователь не найден . Обратитесь в поддержку" });
+        }
+    }
+
+    [HttpPost("change-role")]
+    public async Task<IActionResult> ChangeRole([FromBody] UserDtOs.ChangeRoleRequest request)
+    {
+        var user = await _userManager.FindByNameAsync(request.UserName);
+        if (user != null)
+        {
+            var result = await _userMgmtService.ChangeUserRole(user, request.newRole);
+            if (result.Success)
+            {
+                return Ok(new
+                {
+                    Success = true,
+                    result.Message
+                });
+            }
+            return BadRequest(new
+            {
+                success = false,
+                result.Message
+                
+            });
+        }
+        else
+        {
+            return BadRequest(new { Message = "Пользователь не найден " });
+        }
+    }
+
 }

@@ -8,7 +8,12 @@ public class UserDtOs
        public IQueryable Message { get; set; }
         
     }
-    
+
+    public class ActionResult
+    {
+        public bool Success { get; set; }
+        public string Message { get; set; }
+    }
 
     public class UserData
     {
@@ -18,5 +23,12 @@ public class UserDtOs
         public string? Status  { get; set; }
         
         public IList<string>? Role { get; set; }
+    }
+
+
+    public class ChangeRoleRequest
+    {
+        public string UserName { get; set; }
+        public string newRole { get; set; }
     }
 }
