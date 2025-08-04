@@ -1,10 +1,21 @@
 using Microsoft.OpenApi.Models;
 using RabbitMQ.Client;
+using GameRankAdminPanel.Data;
+using GameRankAdminPanel.Interfaces;
+using GameRankAdminPanel.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 using GameRankAdminPanel.Services.RabbitMQ;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
-// Add services to the container.
+builder.Services.AddDbContext<AdminPanelDBContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("AdminDBConnection")));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -13,6 +24,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddScoped<RabbitMQService>();
+builder.Services.AddScoped<IUserMgmtService, UserMgmtService>();
 
 var app = builder.Build();
 
