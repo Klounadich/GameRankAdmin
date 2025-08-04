@@ -84,7 +84,7 @@ public class UserMgmtService : IUserMgmtService
             return new UserDtOs.ActionResult()
             {
                 Success = true,
-                Message = $"User {user.UserName} has been banned"
+                Message = $"Пользователь{user.UserName} был успешно забанен"
             };
         }
         else
@@ -92,7 +92,7 @@ public class UserMgmtService : IUserMgmtService
             return new UserDtOs.ActionResult
             {
                 Success = false,
-                Message = $"User {user.UserName} has not been banned . Try again later"
+                Message = $"Пользователь {user.UserName} не был забанен . Попробуйте позже"
             };
         }
 

@@ -15,8 +15,6 @@ public interface IUserMgmtService
     public Task<UserDtOs.ActionResult> ChangeUserRole(IdentityUser user , string newRole);
     
    public Task<UserDtOs.ActionResult> UnbanUser(IdentityUser user);
-    /*
-   public Task<UserDtOs.Result> DeleteUser(UserDtOs.UserData userData);
-   */
+    
     
 }

@@ -42,7 +42,7 @@ public class AdminMgmtController:ControllerBase
             });
         }
         else
-        {
+        { 
             return BadRequest(new { Message = "Пользователь не найден . Обратитесь в поддержку" });
         }
     }
