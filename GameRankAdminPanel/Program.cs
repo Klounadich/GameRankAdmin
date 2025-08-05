@@ -25,6 +25,15 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddScoped<RabbitMQService>();
 builder.Services.AddScoped<IUserMgmtService, UserMgmtService>();
+// CORS Settings --------------------------------------------------------------------------------
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.WithOrigins("http://localhost" , "http://192.168.0.103").AllowAnyHeader().AllowAnyMethod().AllowCredentials(); 
+    });
+});
+//  --------------------------------------------------------------------------------
 
 var app = builder.Build();
 
@@ -39,7 +48,10 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseHttpsRedirection();
+app.UseRouting();
+app.UseCors("AllowAll");
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
