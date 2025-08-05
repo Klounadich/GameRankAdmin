@@ -21,6 +21,7 @@ public class UserDtOs
         public string? Id { get; set; }
         public string? IPAdress { get; set; }
         public string? Status  { get; set; }
+        public string? Email { get; set; }
         
         public IList<string>? Role { get; set; }
     }
@@ -30,5 +31,6 @@ public class UserDtOs
     {
         public string UserName { get; set; }
         public string newRole { get; set; }
+        
     }
 }

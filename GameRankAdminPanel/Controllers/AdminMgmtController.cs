@@ -55,7 +55,7 @@ public class AdminMgmtController:ControllerBase
         {
             return Ok(new
             {
-                BanList = result.Message 
+                BanList = result.Message
             });
         }
         return BadRequest();
@@ -139,9 +139,10 @@ public class AdminMgmtController:ControllerBase
     public async Task<IActionResult> ChangeRole([FromBody] UserDtOs.ChangeRoleRequest request)
     {
         var user = await _userManager.FindByNameAsync(request.UserName);
+        var senderId = user.Id;
         if (user != null)
         {
-            var result = await _userMgmtService.ChangeUserRole(user, request.newRole);
+            var result = await _userMgmtService.ChangeUserRole(user, request.newRole , senderId);
             if (result.Success)
             {
                 return Ok(new

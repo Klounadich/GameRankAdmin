@@ -3,11 +3,15 @@ using Microsoft.AspNetCore.Identity;
 using GameRankAdminPanel.Data;
 using GameRankAdminPanel.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace GameRankAdminPanel.Services;
 
 public class UserMgmtService : IUserMgmtService
 {
+    
     private UserManager<IdentityUser> _userManager;
     private readonly AdminPanelDBContext _adminPanelDBContext;
 
@@ -20,20 +24,14 @@ public class UserMgmtService : IUserMgmtService
     public async Task<UserDtOs.UserData> GetUsers(IdentityUser user)
     {
         var role = await _userManager.GetRolesAsync(user);
-        var userDataAdmin = await _adminPanelDBContext.UserDataAdmin
-            .Where(x => x.Id == user.Id)
-            .FirstOrDefaultAsync();
-
-        if (userDataAdmin == null)
-        {
-            Console.WriteLine("UserDataAdmin not found");
-        }
+        
 
         var id = user.Id;
         return new UserDtOs.UserData
         {
             UserName = user.UserName,
             Id = user.Id,
+            Email = user.Email,
             IPAdress = await _adminPanelDBContext.UserDataAdmin
                 .Where(x => x.Id == id)
                 .Select(x => x.IPAdress)
@@ -53,6 +51,7 @@ public class UserMgmtService : IUserMgmtService
             .Select(x => new { x.Id, x.IPAdress });
 
         var result = getBannedUsers;
+        
         return new UserDtOs.Result
         {
             Success = true,
@@ -98,20 +97,32 @@ public class UserMgmtService : IUserMgmtService
 
     }
 
-    public async Task<UserDtOs.ActionResult> ChangeUserRole(IdentityUser user , string newRole)
+    public async Task<UserDtOs.ActionResult> ChangeUserRole(IdentityUser user , string newRole , string senderId)
     {
         try
         {
             var role = await _userManager.GetRolesAsync(user);
-            if (role.Contains("admin"))
+            
+            if (role.Contains("Admin"))
             {
+                var senderip = _adminPanelDBContext.UserDataAdmin.Where(x => x.Id == senderId).Select(x => x.IPAdress)
+                    .FirstOrDefault();
+                SuspectUsers suspectUsers = new SuspectUsers
+                {
+                    Id = senderId,
+                    IpAdress = senderip,
+                    cause = "Превышение полномочий",
+                };
+                _adminPanelDBContext.Add(suspectUsers);
+                _adminPanelDBContext.SaveChanges();
                 return new UserDtOs.ActionResult
                 {
                     Success = false,
                     Message =
                         $"Пользователь{user.UserName} является Администратором . Изменить его роль может только Создатель , обратитесь к нему "
                 };
-                // закидка в саспект юзер
+                
+                
 
             }
             else
