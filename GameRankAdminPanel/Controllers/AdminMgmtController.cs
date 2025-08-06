@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using GameRankAdminPanel.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using GameRankAdminPanel.Data;
 
 namespace GameRankAdminPanel.Controllers;
 
@@ -15,9 +16,11 @@ public class AdminMgmtController:ControllerBase
     private readonly UserManager<IdentityUser> _userManager;
     private readonly RabbitMQService _rabbitMQService;
     private readonly IUserMgmtService  _userMgmtService;
+    private readonly AdminPanelDBContext _adminPanelDBContext;
     public AdminMgmtController(RabbitMQService rabbitMQService , UserManager<IdentityUser> userManager ,
-        IUserMgmtService userMgmtService)
+        IUserMgmtService userMgmtService ,  AdminPanelDBContext adminPanelDBContext)
     {
+        _adminPanelDBContext= adminPanelDBContext;
         _userMgmtService = userMgmtService;
         _userManager = userManager;
         _rabbitMQService = rabbitMQService;
@@ -75,6 +78,16 @@ public class AdminMgmtController:ControllerBase
             });
         }
         return BadRequest();
+    }
+
+    [HttpPost("ignore-suspect")]
+    public async Task<IActionResult> IgnoreSuspectUser([FromBody] string IPadress)
+    {
+        var suspect = _adminPanelDBContext.SuspectUsers.Where(x => IPadress == x.IpAdress);
+        _adminPanelDBContext.SuspectUsers.RemoveRange(suspect);
+        _adminPanelDBContext.SaveChanges();
+        return Ok();
+        
     }
 
 
