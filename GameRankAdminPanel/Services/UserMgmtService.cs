@@ -97,7 +97,7 @@ public class UserMgmtService : IUserMgmtService
 
     }
 
-    public async Task<UserDtOs.ActionResult> ChangeUserRole(IdentityUser user , string newRole , string senderId)
+    public async Task<UserDtOs.ActionResult> ChangeUserRole(IdentityUser user , string newRole , string senderId , string senderName)
     {
         try
         {
@@ -112,6 +112,7 @@ public class UserMgmtService : IUserMgmtService
                     Id = senderId,
                     IpAdress = senderip,
                     cause = "Превышение полномочий",
+                    Username = senderName,
                 };
                 _adminPanelDBContext.Add(suspectUsers);
                 _adminPanelDBContext.SaveChanges();

@@ -12,7 +12,7 @@ public interface IUserMgmtService
   
     public Task<UserDtOs.ActionResult> BanUser(IdentityUser user);
    
-    public Task<UserDtOs.ActionResult> ChangeUserRole(IdentityUser user , string newRole , string senderId);
+    public Task<UserDtOs.ActionResult> ChangeUserRole(IdentityUser user , string newRole , string senderId , string senderName);
     
    public Task<UserDtOs.ActionResult> UnbanUser(IdentityUser user);
     

@@ -2,6 +2,7 @@ using GameRankAdminPanel.Interfaces;
 using GameRankAdminPanel.Services.RabbitMQ;
 using Microsoft.AspNetCore.Mvc;
 using GameRankAdminPanel.Models;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 
 namespace GameRankAdminPanel.Controllers;
@@ -37,6 +38,7 @@ public class AdminMgmtController:ControllerBase
                 Username = result.UserName,
                 Role = result.Role,
                 Status = result.Status,
+                Email = result.Email,
                 IpAdress = result.IPAdress
 
             });
@@ -139,10 +141,11 @@ public class AdminMgmtController:ControllerBase
     public async Task<IActionResult> ChangeRole([FromBody] UserDtOs.ChangeRoleRequest request)
     {
         var user = await _userManager.FindByNameAsync(request.UserName);
-        var senderId = user.Id;
+        var senderId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var senderName = User.FindFirstValue(ClaimTypes.Name);
         if (user != null)
         {
-            var result = await _userMgmtService.ChangeUserRole(user, request.newRole , senderId);
+            var result = await _userMgmtService.ChangeUserRole(user, request.newRole , senderId , senderName);
             if (result.Success)
             {
                 return Ok(new
