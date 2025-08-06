@@ -48,7 +48,7 @@ public class UserMgmtService : IUserMgmtService
     public async Task<UserDtOs.Result> GetBannedUsers()
     {
         var getBannedUsers = _adminPanelDBContext.UserDataAdmin.Where(x => x.Status == "banned")
-            .Select(x => new { x.Id, x.IPAdress , x.Username });
+            .Select(x => new { x.Id, x.IPAdress , x.UserName });
 
         var result = getBannedUsers;
         
