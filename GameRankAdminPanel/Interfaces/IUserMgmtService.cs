@@ -5,7 +5,7 @@ namespace GameRankAdminPanel.Interfaces;
 
 public interface IUserMgmtService
 {
-    public Task<UserDtOs.UserData> GetUsers(IdentityUser user);
+    public Task<List<UserDtOs.UserData>> GetUsers(string users);
     public Task<UserDtOs.Result> GetBannedUsers();
     public Task<UserDtOs.Result> SuspectUser();
     

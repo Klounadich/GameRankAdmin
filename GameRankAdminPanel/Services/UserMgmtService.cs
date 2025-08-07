@@ -1,3 +1,4 @@
+using System.Net;
 using GameRankAdminPanel.Models;
 using Microsoft.AspNetCore.Identity;
 using GameRankAdminPanel.Data;
@@ -13,18 +14,58 @@ public class UserMgmtService : IUserMgmtService
 {
     
     private UserManager<IdentityUser> _userManager;
+    private ApplicationDbContext _context;
     private readonly AdminPanelDBContext _adminPanelDBContext;
 
-    public UserMgmtService(UserManager<IdentityUser> userManager, AdminPanelDBContext adminPanelDBContext)
+    public UserMgmtService(UserManager<IdentityUser> userManager, AdminPanelDBContext adminPanelDBContext , ApplicationDbContext context)
     {
+        _context =  context;
         _adminPanelDBContext = adminPanelDBContext;
         _userManager = userManager;
     }
 
-    public async Task<UserDtOs.UserData> GetUsers(IdentityUser user)
+    public async Task<List<UserDtOs.UserData>> GetUsers(string users)
     {
-        var role = await _userManager.GetRolesAsync(user);
-        
+        var FindsUsers = await _context.Users
+            .Where(x => x.UserName.StartsWith(users))
+            .Select(x => new {x.UserName, x.Id, x.Email})
+            .ToListAsync();
+
+        var GetIDs = FindsUsers.Select(x => x.Id).ToList();
+
+
+        var GetRoles = await _context.UserRoles
+            .Where(x => GetIDs.Contains(x.UserId))
+            .ToListAsync();
+        var roleIds = GetRoles.Select(x => x.RoleId).Distinct().ToList();
+
+        var roles = await _context.Roles
+            .Where(r => roleIds.Contains(r.Id))
+            .ToDictionaryAsync(r => r.Id, r => r.Name);
+
+        var GetAdminData = await _adminPanelDBContext.UserDataAdmin
+            .Where(x => GetIDs.Contains(x.Id))
+            .ToListAsync(); 
+
+        var result = FindsUsers
+            .Select(user => new UserDtOs.UserData  
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                
+                Roles = GetRoles
+                    .Where(ur => ur.UserId == user.Id)
+                    .Select(ur => roles[ur.RoleId]) 
+                    .ToList(),
+                IPAddress = GetAdminData.FirstOrDefault(a => a.Id == user.Id)?.IPAdress,
+                Status = GetAdminData.FirstOrDefault(a => a.Id == user.Id)?.Status
+            })
+            .ToList();
+            Console.WriteLine(GetAdminData.Count);
+        return result;
+        /*var role = await _userManager.GetRolesAsync(user);
+
 
         var id = user.Id;
         return new UserDtOs.UserData
@@ -43,6 +84,7 @@ public class UserMgmtService : IUserMgmtService
             Role = role
 
         };
+        */
     }
 
     public async Task<UserDtOs.Result> GetBannedUsers()

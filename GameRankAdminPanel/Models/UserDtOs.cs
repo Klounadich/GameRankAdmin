@@ -17,13 +17,12 @@ public class UserDtOs
 
     public class UserData
     {
-        public string? UserName { get; set; }
-        public string? Id { get; set; }
-        public string? IPAdress { get; set; }
-        public string? Status  { get; set; }
-        public string? Email { get; set; }
-        
-        public IList<string>? Role { get; set; }
+        public string Id { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public List<string> Roles { get; set; } 
+        public string IPAddress { get; set; }
+        public string Status { get; set; }
     }
 
 

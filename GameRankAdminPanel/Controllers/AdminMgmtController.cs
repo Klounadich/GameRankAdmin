@@ -31,18 +31,15 @@ public class AdminMgmtController:ControllerBase
     public async Task<IActionResult> GetUsers([FromBody] string Username)
     {
         
-        var  user = await _userManager.FindByNameAsync(Username);
-        if (user != null)
+        
+        if (Username != null)
         {
-            var result = await _userMgmtService.GetUsers(user);
+            var result = await _userMgmtService.GetUsers(Username);
+            
 
             return Ok(new
             {
-                Username = result.UserName,
-                Role = result.Role,
-                Status = result.Status,
-                Email = result.Email,
-                IpAdress = result.IPAdress
+                result
 
             });
         }
@@ -83,11 +80,17 @@ public class AdminMgmtController:ControllerBase
     [HttpPost("ignore-suspect")]
     public async Task<IActionResult> IgnoreSuspectUser([FromBody] string IPadress)
     {
-        var suspect = _adminPanelDBContext.SuspectUsers.Where(x => IPadress == x.IpAdress);
-        _adminPanelDBContext.SuspectUsers.RemoveRange(suspect);
-        _adminPanelDBContext.SaveChanges();
-        return Ok();
-        
+        var suspects =  _adminPanelDBContext.SuspectUsers
+            .Where(x => x.IpAdress == IPadress)
+            .ToList();
+
+        if (suspects.Any())
+        {
+            _adminPanelDBContext.SuspectUsers.RemoveRange(suspects);
+            await _adminPanelDBContext.SaveChangesAsync();
+            return Ok();
+        }
+        return NotFound();
     }
 
 
