@@ -170,6 +170,7 @@ public class AdminMgmtController:ControllerBase
                     result.Message
                 });
             }
+            
             return BadRequest(new
             {
                 success = false,

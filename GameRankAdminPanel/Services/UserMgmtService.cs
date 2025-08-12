@@ -64,27 +64,7 @@ public class UserMgmtService : IUserMgmtService
             .ToList();
             Console.WriteLine(GetAdminData.Count);
         return result;
-        /*var role = await _userManager.GetRolesAsync(user);
 
-
-        var id = user.Id;
-        return new UserDtOs.UserData
-        {
-            UserName = user.UserName,
-            Id = user.Id,
-            Email = user.Email,
-            IPAdress = await _adminPanelDBContext.UserDataAdmin
-                .Where(x => x.Id == id)
-                .Select(x => x.IPAdress)
-                .FirstOrDefaultAsync() ?? "0.0.0.0",
-            Status = await _adminPanelDBContext.UserDataAdmin
-                .Where(x => x.Id == id)
-                .Select(x => x.Status)
-                .FirstOrDefaultAsync() ?? "banned",
-            Role = role
-
-        };
-        */
     }
 
     public async Task<UserDtOs.Result> GetBannedUsers()
@@ -147,6 +127,7 @@ public class UserMgmtService : IUserMgmtService
             
             if (role.Contains("Admin"))
             {
+                Console.WriteLine("дошли");
                 var senderip = _adminPanelDBContext.UserDataAdmin.Where(x => x.Id == senderId).Select(x => x.IPAdress)
                     .FirstOrDefault();
                 SuspectUsers suspectUsers = new SuspectUsers
@@ -158,6 +139,7 @@ public class UserMgmtService : IUserMgmtService
                 };
                 _adminPanelDBContext.Add(suspectUsers);
                 _adminPanelDBContext.SaveChanges();
+                Console.WriteLine("дошли");
                 return new UserDtOs.ActionResult
                 {
                     Success = false,
@@ -182,6 +164,7 @@ public class UserMgmtService : IUserMgmtService
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex.Message);
             return new UserDtOs.ActionResult
             {
                 Success = false,
