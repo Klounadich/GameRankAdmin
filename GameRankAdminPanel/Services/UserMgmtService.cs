@@ -130,6 +130,7 @@ public class UserMgmtService : IUserMgmtService
                 Console.WriteLine("дошли");
                 var senderip = _adminPanelDBContext.UserDataAdmin.Where(x => x.Id == senderId).Select(x => x.IPAdress)
                     .FirstOrDefault();
+                Console.WriteLine($" АЙПИИИИИИИ {senderId}");
                 SuspectUsers suspectUsers = new SuspectUsers
                 {
                     Id = senderId,

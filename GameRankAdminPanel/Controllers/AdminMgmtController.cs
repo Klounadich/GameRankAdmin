@@ -159,8 +159,8 @@ public class AdminMgmtController:ControllerBase
     public async Task<IActionResult> ChangeRole([FromBody] UserDtOs.ChangeRoleRequest request)
     {
         var user = await _userManager.FindByNameAsync(request.UserName);
-        var senderId = User.FindFirst(ClaimTypes.NameIdentifier).ToString();
-        var senderName = User.FindFirst(ClaimTypes.Name).ToString();
+        var senderId = User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
+        var senderName = User.FindFirstValue(ClaimTypes.Name).ToString();
         if (user != null)
         {
             var result = await _userMgmtService.ChangeUserRole(user, request.newRole , senderId , senderName);
