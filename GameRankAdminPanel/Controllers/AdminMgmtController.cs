@@ -5,6 +5,7 @@ using GameRankAdminPanel.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using GameRankAdminPanel.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GameRankAdminPanel.Controllers;
 
@@ -154,11 +155,12 @@ public class AdminMgmtController:ControllerBase
     }
 
     [HttpPost("change-role")]
+    [Authorize]
     public async Task<IActionResult> ChangeRole([FromBody] UserDtOs.ChangeRoleRequest request)
     {
         var user = await _userManager.FindByNameAsync(request.UserName);
-        var senderId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        var senderName = User.FindFirstValue(ClaimTypes.Name);
+        var senderId = User.FindFirst(ClaimTypes.NameIdentifier).ToString();
+        var senderName = User.FindFirst(ClaimTypes.Name).ToString();
         if (user != null)
         {
             var result = await _userMgmtService.ChangeUserRole(user, request.newRole , senderId , senderName);

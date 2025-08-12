@@ -136,3 +136,11 @@ C:\Users\Ярослав\my pets\GameRankAdminPanel\GameRankAdminPanel\obj\Debug\
 C:\Users\Ярослав\my pets\GameRankAdminPanel\GameRankAdminPanel\obj\Debug\net8.0\GameRankAdminPanel.pdb
 C:\Users\Ярослав\my pets\GameRankAdminPanel\GameRankAdminPanel\obj\Debug\net8.0\GameRankAdminPanel.genruntimeconfig.cache
 C:\Users\Ярослав\my pets\GameRankAdminPanel\GameRankAdminPanel\obj\Debug\net8.0\ref\GameRankAdminPanel.dll
+C:\Users\Ярослав\my pets\GameRankAdminPanel\GameRankAdminPanel\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Ярослав\my pets\GameRankAdminPanel\GameRankAdminPanel\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Ярослав\my pets\GameRankAdminPanel\GameRankAdminPanel\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Ярослав\my pets\GameRankAdminPanel\GameRankAdminPanel\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Ярослав\my pets\GameRankAdminPanel\GameRankAdminPanel\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Ярослав\my pets\GameRankAdminPanel\GameRankAdminPanel\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Ярослав\my pets\GameRankAdminPanel\GameRankAdminPanel\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Ярослав\my pets\GameRankAdminPanel\GameRankAdminPanel\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll

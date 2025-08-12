@@ -5,14 +5,29 @@ using GameRankAdminPanel.Interfaces;
 using GameRankAdminPanel.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using GameRankAdminPanel.Services.RabbitMQ;
+using GameRankAuth.Data;
+using GameRankAuth.Services;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddAuth(builder.Configuration);
+var jwtSection = builder.Configuration.GetSection("jwt");
+var authSettings = builder.Configuration.GetSection("jwt").Get<AuthSettings>();
+jwtSection.Bind(authSettings);
+builder.Services.AddSingleton(authSettings);
+builder.Services.AddAuthorization(options =>
+{
+    
+    options.DefaultPolicy = new AuthorizationPolicyBuilder().AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme).RequireAuthenticatedUser().Build();
+});
 
 builder.Services.AddDbContext<AdminPanelDBContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("AdminDBConnection")));
