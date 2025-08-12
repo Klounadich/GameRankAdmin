@@ -6,6 +6,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using GameRankAdminPanel.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace GameRankAdminPanel.Controllers;
 
@@ -28,7 +29,7 @@ public class AdminMgmtController:ControllerBase
     }
 
     [HttpPost("get")]
-
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
     public async Task<IActionResult> GetUsers([FromBody] string Username)
     {
         
@@ -51,6 +52,7 @@ public class AdminMgmtController:ControllerBase
     }
 
     [HttpGet("get-ban")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
     public async Task<IActionResult> GetBanUsers()
     {
         var result = await _userMgmtService.GetBannedUsers();
@@ -65,6 +67,7 @@ public class AdminMgmtController:ControllerBase
     }
     
     [HttpGet("get-suspect")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
     public async Task<IActionResult> GetSuspectUsers()
     {
         var result = await _userMgmtService.SuspectUser();
@@ -79,6 +82,7 @@ public class AdminMgmtController:ControllerBase
     }
 
     [HttpPost("ignore-suspect")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
     public async Task<IActionResult> IgnoreSuspectUser([FromBody] string IPadress)
     {
         var suspects =  _adminPanelDBContext.SuspectUsers
@@ -91,11 +95,15 @@ public class AdminMgmtController:ControllerBase
             await _adminPanelDBContext.SaveChangesAsync();
             return Ok();
         }
-        return NotFound();
+        else
+        {
+            return NotFound();
+        }
     }
 
 
     [HttpPost("ban-user")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
     public async Task<IActionResult> BanUser([FromBody] string Username)
     {
         var user = await _userManager.FindByNameAsync(Username);
@@ -125,6 +133,7 @@ public class AdminMgmtController:ControllerBase
         }
     }
     [HttpPost("unban-user")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
     public async Task<IActionResult> UnBanUser([FromBody] string Username)
     {
         var user = await _userManager.FindByNameAsync(Username);
@@ -155,7 +164,7 @@ public class AdminMgmtController:ControllerBase
     }
 
     [HttpPost("change-role")]
-    [Authorize]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
     public async Task<IActionResult> ChangeRole([FromBody] UserDtOs.ChangeRoleRequest request)
     {
         var user = await _userManager.FindByNameAsync(request.UserName);

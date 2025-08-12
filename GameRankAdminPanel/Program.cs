@@ -29,6 +29,8 @@ builder.Services.AddAuthorization(options =>
     options.DefaultPolicy = new AuthorizationPolicyBuilder().AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme).RequireAuthenticatedUser().Build();
 });
 
+
+
 builder.Services.AddDbContext<AdminPanelDBContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("AdminDBConnection")));
 builder.Services.AddControllers();
@@ -61,6 +63,17 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "GameRank Admin API V1");
         c.RoutePrefix = "swagger"; 
     });
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var roles = new [] {"Admin" , "User" , "Creator"};
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+            await roleManager.CreateAsync(new IdentityRole(role));
+    }
 }
 
 app.UseRouting();
