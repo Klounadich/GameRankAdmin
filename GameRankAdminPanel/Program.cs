@@ -13,6 +13,7 @@ using GameRankAuth.Services;
 using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
+  // Слушаем все IP
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>()
@@ -51,7 +52,7 @@ builder.Services.AddCors(options =>
     });
 });
 //  --------------------------------------------------------------------------------
-
+builder.WebHost.UseUrls("http://192.168.0.103:5002");
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
