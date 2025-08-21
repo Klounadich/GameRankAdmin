@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/home/klounadich/DEV/GameRankAdmin/GameRankAdminPanel/GameRankAdminPanel.csproj": {}
+    "C:\\Users\\Ярослав\\my pets\\GameRankAdmin\\GameRankAdminPanel\\GameRankAdminPanel.csproj": {}
   },
   "projects": {
-    "/home/klounadich/DEV/GameRankAdmin/GameRankAdminPanel/GameRankAdminPanel.csproj": {
+    "C:\\Users\\Ярослав\\my pets\\GameRankAdmin\\GameRankAdminPanel\\GameRankAdminPanel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/klounadich/DEV/GameRankAdmin/GameRankAdminPanel/GameRankAdminPanel.csproj",
+        "projectUniqueName": "C:\\Users\\Ярослав\\my pets\\GameRankAdmin\\GameRankAdminPanel\\GameRankAdminPanel.csproj",
         "projectName": "GameRankAdminPanel",
-        "projectPath": "/home/klounadich/DEV/GameRankAdmin/GameRankAdminPanel/GameRankAdminPanel.csproj",
-        "packagesPath": "/home/klounadich/.nuget/packages/",
-        "outputPath": "/home/klounadich/DEV/GameRankAdmin/GameRankAdminPanel/obj/",
+        "projectPath": "C:\\Users\\Ярослав\\my pets\\GameRankAdmin\\GameRankAdminPanel\\GameRankAdminPanel.csproj",
+        "packagesPath": "C:\\Users\\Ярослав\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ярослав\\my pets\\GameRankAdmin\\GameRankAdminPanel\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/klounadich/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Ярослав\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -106,20 +112,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.19, 8.0.19]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.linux-x64",
-              "version": "[8.0.19, 8.0.19]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.19, 8.0.19]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -128,7 +120,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

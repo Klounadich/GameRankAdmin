@@ -100,6 +100,7 @@ public class UserMgmtService : IUserMgmtService
             await _adminPanelDBContext.UserDataAdmin.FirstOrDefaultAsync(x => x.Id == Id && x.Status != "banned");
         if (GetUserData != null)
         {
+            await _userManager.AddClaimAsync(user, new Claim("Banned", "true"));
             GetUserData.Status = "banned";
             _adminPanelDBContext.SaveChanges();
             return new UserDtOs.ActionResult()
@@ -184,6 +185,7 @@ public class UserMgmtService : IUserMgmtService
             await _adminPanelDBContext.UserDataAdmin.FirstOrDefaultAsync(x => x.Id == Id && x.Status != "active");
         if (GetUserData != null)
         {
+            await _userManager.RemoveClaimAsync(user, new Claim("Banned", "true"));
             GetUserData.Status = "active";
             _adminPanelDBContext.SaveChanges();
             return new UserDtOs.ActionResult()
