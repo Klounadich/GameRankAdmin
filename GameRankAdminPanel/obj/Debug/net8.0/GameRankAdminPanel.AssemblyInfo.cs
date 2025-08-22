@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GameRankAdminPanel")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+247cb11ec7f2bf64bd9c7a85e64bd02302ac7cf0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2ab8705624a8a01ccc068eaa840e4ef19bf9bb91")]
 [assembly: System.Reflection.AssemblyProductAttribute("GameRankAdminPanel")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GameRankAdminPanel")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
