@@ -12,7 +12,7 @@ namespace GameRankAdminPanel.Controllers;
 
 [ApiController]
 
-[Route("api/admin")]
+[Route("api2/admin")]
 public class AdminMgmtController:ControllerBase
 {
     private readonly UserManager<IdentityUser> _userManager;
