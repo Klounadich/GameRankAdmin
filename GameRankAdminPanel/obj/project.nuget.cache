@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KsuuNrKCPeM=",
+  "dgSpecHash": "BKFDlrd0WW4=",
   "success": true,
-  "projectFilePath": "/home/klounadich/DEV/GameRankAdmin/GameRankAdminPanel/GameRankAdminPanel.csproj",
+  "projectFilePath": "/home/klounadich/dev/GameRankAdmin/GameRankAdminPanel/GameRankAdminPanel.csproj",
   "expectedPackageFiles": [
     "/home/klounadich/.nuget/packages/entityframework/6.5.1/entityframework.6.5.1.nupkg.sha512",
     "/home/klounadich/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
@@ -104,7 +104,6 @@
     "/home/klounadich/.nuget/packages/system.threading.channels/6.0.0/system.threading.channels.6.0.0.nupkg.sha512",
     "/home/klounadich/.nuget/packages/system.threading.ratelimiting/8.0.0/system.threading.ratelimiting.8.0.0.nupkg.sha512",
     "/home/klounadich/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512",
-    "/home/klounadich/.nuget/packages/microsoft.netcore.app.ref/8.0.19/microsoft.netcore.app.ref.8.0.19.nupkg.sha512",
     "/home/klounadich/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.19/microsoft.aspnetcore.app.ref.8.0.19.nupkg.sha512",
     "/home/klounadich/.nuget/packages/microsoft.netcore.app.host.linux-x64/8.0.19/microsoft.netcore.app.host.linux-x64.8.0.19.nupkg.sha512"
   ],
